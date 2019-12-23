@@ -1,0 +1,147 @@
+create table  customers(
+id int not null,
+name varchar(20) not null,
+age int  not null,
+address char(25),
+salary decimal(18,2),
+primary key(id)
+);
+
+
+insert into customers
+values
+(1,'xyz',22,'nadiad',20000);
+
+select *from customers;
+
+
+insert into customers
+values
+(2,'abc',24,'vadodara',25000);
+
+
+desc customers;
+
+
+
+create table client_master(
+clientno varchar2(6),
+name varchar2(20),
+address1 varchar2(30),
+address2 varchar2(30),
+city varchar2(15),
+pincode number(8),
+state varchar2(15),
+baldue number(10,2)
+);
+
+insert into client_master
+values
+('c0001','abc','waghodia','vadodara','vadodara',390019,'gujarat',1000.34);
+
+
+select *from client_master;
+
+create table product_master(
+productno varchar2(6),
+description varchar2(15),
+profitpercent number(4,2),
+unitmeasure varchar2(10),
+qtyonhand number(8),
+reordervl number(8),
+sellprice number(8,2),
+costprice number(8,2)
+);
+
+select *from client_master;
+
+truncate table client_master;
+
+desc client_master;
+
+insert into client_master(clientno,name,city,pincode,state,baldue)
+values
+('c00001','korth sudarshan','mumbai',400054,'maharastra',15000);
+
+insert into client_master(clientno,name,city,pincode,state,baldue)
+values
+('c00002','mamta muzumdar','madras',780001,'tamil nadu',0);
+insert into client_master(clientno,name,city,pincode,state,baldue)
+values
+('c00003','chhaya bankar','mumbai',400057,'maharastra',5000);
+
+create table salesman_master(
+salesmanno varchar2(6),
+salesmanname varchar2(20),
+address1 varchar2(30),
+address2 varchar2(30),
+city varchar2(20),
+pincode number(8),
+state varchar2(20),
+salamt number(8,2),
+tgttoget number(6,2),
+ytdsales number(6,2),
+remarks varchar2(60)
+);
+
+
+insert into product_master
+values
+('p00001','t-shirts',5,'piece',200,50,350,250);
+
+insert into salesman_master
+values
+('s00001','aman','A/14','worli','mumbai',400002,'maharastra',3000,100,50,'good');
+
+insert into product_master
+values
+('p0345','shirts',6,'piece',150,50,500,350);
+
+insert into salesman_master
+values
+('s00002','omkar','65','nariman','mumbai',400001,'maharastra',3000,200,100,'good');
+
+select *from salesman_master;
+
+select name from client_master;
+
+select *from client_master;
+
+select name,city,state from client_master;
+
+select description from product_master;
+
+select name,city from client_master where city='mumbai';
+
+select salesmanname,salamt from salesman_master where salamt=3000;
+
+update client_master set city='bangalore' where clientno='c00002';
+
+update client_master set baldue=1000 where clientno='c00001';
+
+update product_master set costprice=950.00 where description='shirts';
+
+update salesman_master set city='pune';
+
+delete *from salesman_master where salamt=3500;
+
+insert into salesman_master
+values
+('s00004','ashish','A/5','juhu','mumbai',400044,'maharastra',3500,200,100,'good');
+
+delete from salesman_master where salamt=3500;
+
+delete from product_master where qtyonhand=100;
+
+delete from client_master where state='tamil nadu';
+
+ALTER TABLE client_master ADD telephone number(10); 
+
+ALTER TABLE product_master MODIFY sellprice number(10,2);
+
+drop table client_master;
+
+rename salesman_master to sman_mast;
+
+
+

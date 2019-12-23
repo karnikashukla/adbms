@@ -1,0 +1,46 @@
+1. 
+create table employee(
+empid int,
+empname varchar2(20),
+salary decimal(10,2),
+deptno int,
+designation varchar2(15),
+primary key(empid)
+);
+
+
+create or replace trigger insert_trig
+ AFTER INSERT ON employee
+begin
+ dbms_output.put_line('Employee added.!');
+end;
+
+insert into employee
+values
+(25,'xyz',25000,2,'manager');
+
+2.
+create or replace trigger upd_trig
+ after update on employee
+ referencing NEW as newsal OLD as oldsal
+FOR EACH ROW
+
+begin
+ if(:newsal.salary>=:oldsal.salary+2000) then
+  dbms_output.put_line('salary can not updated.');
+  dbms_output.put_line('New salary :' || :newsal.salary);
+  dbms_output.put_line('old salary :' || :oldsal.salary);
+ else
+  dbms_output.put_line('salary updated.');
+ end if;
+ 
+end;
+
+update employee set salary=salary+2000;
+
+3.
+
+
+delete from employee where empid=25;
+
+4.

@@ -1,0 +1,59 @@
+1. 
+declare 
+ id number;
+ hra decimal(10,2);
+ da decimal(10,2);
+ netsal decimal(10,2);
+ basicsal decimal(10,2);
+begin
+ dbms_output.put_line('Enter employee id  : ' || :id);
+ 
+ for id in (select empid from employee) loop
+    select salary into basicsal from employee where empid = id;
+    hra  := basicsal * 0.10;
+    da := basicsal * 0.60;
+    netsal := basicsal + hra +da ;
+    
+    dbms_output.put_line('Net salary is ' || netsal);
+
+ end loop;
+end;
+
+2.
+
+
+declare 
+ id number;
+ salary decimal(10,2);
+begin
+ dbms_output.put_line('Enter employee id : ' || :id);
+
+ for id in (select empid from employee) loop
+  if salary < 10000 then
+    dbms_output.put_line('Less salary');
+  elsif salary >10000 or salary < 30000 then
+    dbms_output.put_line('Medium salary.');
+  elsif salary >30000 or salary < 60000 then
+    dbms_output.put_line('High salary.');
+  elsif salary >6000 then
+    dbms_output.put_line('Very high salary.');
+  end if;
+
+ end loop;
+end;
+
+
+4.
+
+declare 
+ input number;
+ reverse number;
+begin
+ dbms_output.put_line('Enter any number : ' || :input);
+ reverse := 0;
+ while input > 0 loop
+  reverse := (reverse*10) + mod(input,10);
+  input := (input/10);
+ end loop;
+ dbms_output.put_line('Reverse of a number is : ' || reverse);
+end;
