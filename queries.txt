@@ -1,0 +1,93 @@
+create or replace procedure welcome
+as
+begin
+ dbms_output.put_line('Welcome!');
+end;
+
+execute welcome;
+
+begin
+ welcome;
+end;
+
+1.
+create or replace procedure factorial(n IN OUT number,fact IN OUT number)
+is 
+begin
+ while n>0 loop
+    fact:= fact*n;
+    n:= n-1;
+ end loop;
+end;
+
+declare
+ fact number;
+ a number;
+begin
+   a := :n; 
+   fact := 1;
+   factorial(a,fact);
+  dbms_output.put_line('Factorial is  : ' ||fact);
+end;
+3.
+create or replace procedure maximum(x IN number , y IN number , z IN number , ans OUT number) is
+
+begin
+ if x>y AND x>z then
+   ans:=x;
+  elsif y>x AND y>z then
+   ans:=y;
+  else
+    ans:=z;
+  end if;
+end;
+
+declare 
+ a number;
+ b number;
+ c number;
+ d number;
+begin
+ a:= :n1;
+ b:= :n2;
+ c:= :n3;
+ maximum(a,b,c,d);
+ dbms_output.put_line('Maximum is '||d);
+end;
+
+5.
+create or replace procedure percentage(rollno IN number , m1 IN number , m2 IN number , m3 IN number , res OUT varchar2)
+is
+begin
+ total:= m1+m2+m3;
+ per:= (total)/3;
+ 
+ if per>=75 then
+  res:= 'Distinction class';
+ elsif per>=60 and per<75 then
+  res:= 'First class';
+ elsif per>=50 and per<60 then
+  res:= 'Second class';
+ elsif per>=35 and per<50 then
+  res:= 'Pass class';
+ else 
+  res:='FAIL';
+ end if;
+end;
+
+declare
+ mark1 number;
+ mark2 number;
+ mark3 number;
+ rno number;
+ per number;
+ total number;
+ res varchar2(20);
+begin
+ rno:= :Rollno;
+ mark1:= :Mark1;
+ mark2:= :Mark2;
+ mark3:= :Mark3;
+ percentage(rno,mark1,mark2,mark3,res);
+ dbms_output.put_line('Result of rollno '||rno||' for marks '||mark1||','||mark2||','||mark3||' is '||res||' with '||per||'%.');
+end;
