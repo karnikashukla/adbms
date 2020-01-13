@@ -1,0 +1,101 @@
+1.
+declare 
+ avg_Sal number;
+ empid number;
+ 
+ function Average(eid IN number)
+ return number
+ is          
+   avg_Sal number;
+ begin
+    avg_Sal := select avg(salary) from emp where empid=eid group by deptid;
+    return avg_Sal;
+ end;
+
+begin
+ empid := :Enter_Employee_ID;
+ avg_sal := Average(empid);
+ dbms_output.put_line('Average salary is : '||avg_sal); 
+end;
+2.
+declare
+ a number;
+ y number;
+ t varchar2(10);
+ rate number:= 6;
+  function Interest(amt IN number , year IN number,r IN number , type IN varchar2, interest OUT number)
+   Return number 
+   is
+   interest number;
+   begin
+     case type
+       when 1 then
+         interest := (amt*r*y)/100;
+       when 2 then
+         interest := amt*((1+(r/y))**y)
+      end case; 
+      return interest;
+  end Interest;
+begin
+ a:= :Enter_Amount;
+ y:= :Year;
+ t:= :Enter_1_simple_2_Compound;
+ int := interest(a,y,rate,t);
+ dbms_output.put_line('Interest is : '||int);
+end;
+3.
+declare 
+ exp number;
+ expt number;
+ empid number; 
+
+ function cal_experience(eid IN number)
+ return number 
+ is
+   exp number;
+ begin
+   exp := select to_date(sysdate)-to_date(hiredate) as date_difference from emp where empid = eid;
+   if exp < 0 then
+      exp : = (select sum(to_date(sysdate)-to_date(hiredate)) as date_difference from emp )-1;
+      return exp;
+   else
+       return exp;
+    end if;
+ end cal_experience;
+begin
+ empid := :Enter_Employee_id;
+ expt := cal_experience(empid);
+ dbms_output.put_line('Experience is : '||expt);
+end;
+4.
+declare 
+ n number;
+ ans number;
+ i number := 2;
+ temp number := 0;
+
+ function prime(n1 IN number)
+ return number
+ is 
+   ans number;
+ begin
+    for i in 2..n/2
+     loop
+       if mod(n,i) = 0
+       then 
+         temp := 0;
+       end if;
+      end loop;
+   if temp = 1 then
+     return temp;
+   else
+      return temp;
+   end if;
+ 
+ end;
+
+begin
+ n := :Enter_any_number;
+ ans := prime(n);
+ dbms_output.put_line('Number is prime(T/F) : '||ans);
+end;
