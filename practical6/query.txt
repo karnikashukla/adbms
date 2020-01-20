@@ -1,0 +1,72 @@
+1. 
+create or replace package emp_data 
+as
+ procedure emp_totsal(emp_id emp.empid%type);
+ procedure get_empinfo(emp_id emp.empid%type);
+end emp_data;
+
+create or replace package body emp_data as
+ procedure emp_totsal(emp_id emp.empid%type) is
+ totsal emp.salary%type;
+ begin
+  select sum(salary) into totsal from emp;
+  dbms_output.put_line('Total Salary is : '||totsal);
+ end emp_totsal;
+  procedure get_empinfo(emp_id emp.empid%type) is
+  id emp.empid%type;
+  name emp.empname%type;
+  sal emp.salary%type;
+  des emp.designation%type;
+  hdate emp.hiredate%type;
+  dept emp.deptid%type;
+  begin
+   select empid, empname, salary,designation,hiredate,deptid into id,name,des,sal,hdate,dept from emp where empid = emp_id;
+   dbms_output.put_line(id);
+   dbms_output.put_line(name);
+   dbms_output.put_line(sal);
+   dbms_output.put_line(des);
+   dbms_output.put_line(hdate);
+   dbms_output.put_line(dept);
+  end get_empinfo;
+end emp_data;
+
+
+
+declare 
+ emp_id emp.empid%type;
+begin
+ emp_id := :Enter_empid;
+ emp_data.emp_totsal(emp_id);
+ emp_data.get_empinfo(emp_id);
+end;
+
+2.
+CREATE OR REPLACE PACKAGE emp_mgmt as 
+ procedure insert_rec(id number,name varchar2 , des varchar2, sal number , hdate date , dept number);
+ procedure update_rec(id number);
+end emp_mgmt;
+
+create or replace package body emp_mgmt as
+ procedure insert_rec(id in number,name in varchar2 , des in varchar2, sal in number , hdate in date , dept in number) is
+ begin
+  insert into emp values (id,name,des,sal,hdate,dept);
+  dbms_output.put_line('Record inserted.!');
+ end insert_rec;
+ procedure update_rec(id in number) is
+ begin
+  update emp set empname = 'kdb' where empid = id;
+  dbms_output.put_line('Record Updated !');
+ end update_rec;
+end emp_mgmt;
+
+declare
+  id number := :ID;
+  name VARCHAR2(20) := :Name;
+  sal NUMBER := :Salary;
+  des VARCHAR2(20) := :Designation;
+  hdate DATE := :Date;
+  dept NUMBER := :Dept_id;
+begin
+ emp_mgmt.insert_rec(id,name,des,sal,hdate,dept);
+ emp_mgmt.update_rec(id);
+end;
