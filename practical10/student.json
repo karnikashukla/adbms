@@ -1,0 +1,28 @@
+{
+	"id" : "ma033",
+	"name" : "karnika",
+	"branch" : "mca",
+	"adbms" : 24,
+	"dm" : 27
+}
+{
+	"id" : "ma032",
+	"name" : "kavil",
+	"branch" : "mca",
+	"adbms" : 18,
+	"dm" : 24
+}
+{
+	"id" : "ma034",
+	"name" : "saloni",
+	"branch" : "mca",
+	"adbms" : 32,
+	"dm" : 33
+}
+{
+	"id" : "ma021",
+	"name" : "xyz",
+	"branch" : "mca",
+	"adbms" : 26,
+	"dm" : 26
+}

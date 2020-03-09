@@ -1,0 +1,26 @@
+1.
+db.product.insertMany([{"id":1,"item":"refrigerator","brand":"samsung","stock":20,"info":{"operation":"manual","warranty_years":4},"tags":["manual","high temp"],"ratings":[{"by":"jim","ratings":4},{"by":"tom","ratings":3}]},{"id":2,"item":"washing machine","brand":"lg","stock":30,"info":{"operation":"automatic","warranty_years":4},"tags":["6kg","auto"],"ratings":[{"by":"jerry","ratings":4},{"by":"tom","ratings":5}]}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5e4a146b06caf4272a00b8b5"),
+                ObjectId("5e4a146b06caf4272a00b8b6")
+        ]
+}
+
+db.product.insertMany([{"id":3,"item":"television","brand":"samsung","stock":20,"info":{"operation":"manual","warranty_years":5},"tags":["led","plasma"],"ratings":[{"by":"john","ratings":4},{"by":"kin","ratings":3}]},{"id":2,"item":"television","brand":"sony","stock":30,"info":{"operation":"automatic","warranty_years":4},"tags":["42","plasma"],"ratings":[{"by":"darth","ratings":4},{"by":"jenny","ratings":5}]}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5e4a155906caf4272a00b8b7"),
+                ObjectId("5e4a155906caf4272a00b8b8")
+        ]
+}
+2.
+3.
+ db.product.find({"item":"television"},{"brand":1})
+{ "_id" : ObjectId("5e4a155906caf4272a00b8b7"), "brand" : "samsung" }
+{ "_id" : ObjectId("5e4a155906caf4272a00b8b8"), "brand" : "sony" }
+4.
+db.product.find({$and : [{"item":"toaster"},{"info":{"operation":"automatic","warranty_years":2}}]})
+{ "_id" : ObjectId("5e4a17eb06caf4272a00b8ba"), "id" : 3, "item" : "toaster", "brand" : "samsung", "stock" : 20, "info" : { "operation" : "automatic", "warranty_years" : 2 }, "tags" : [ "fast", "high temp" ], "ratings" : [ { "by" : "john", "ratings" : 4 }, { "by" : "kin", "ratings" : 3 } ] }
